@@ -1,0 +1,104 @@
+description: "HDT-6: evaluación reproducible y offline de HDT-5"
+providers:
+  - id: "file://promptfoo_provider.js"
+prompts:
+  - "{{request}}"
+tests:
+  - description: "FAQ conocido: respuesta sustentada"
+    vars:
+      request: '{"question":"¿Qué es HDT-5?"}'
+    assert:
+      - type: contains
+        value: "Es una demostración educativa de agentes."
+      - type: regex
+        value: "faq-001"
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "Es una demostración educativa de agentes."
+      - type: latency
+        threshold: 1000
+  - description: "FAQ desconocido: rechazo sustentado"
+    vars:
+      request: '{"question":"¿Cuál es el color del cielo?"}'
+    assert:
+      - type: contains
+        value: "No tengo una respuesta sustentada"
+      - type: regex
+        value: "^No tengo"
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "No tengo una respuesta sustentada en el FAQ para esa pregunta."
+  - description: "Clima favorable con cita"
+    vars:
+      request: '{"question":"¿Puedo saltar?","requested_date":"2026-09-27","fixture":"favorable"}'
+    assert:
+      - type: contains
+        value: "Estado meteorológico: favorable."
+      - type: regex
+        value: "Open-Meteo: https://api.open-meteo.com/"
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "El estado meteorológico para la fecha solicitada es favorable."
+      - type: latency
+        threshold: 1000
+  - description: "Clima marginal"
+    vars:
+      request: '{"question":"¿Puedo saltar?","requested_date":"2026-09-27","fixture":"marginal"}'
+    assert:
+      - type: regex
+        value: "Estado meteorológico: marginal\\."
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "El estado meteorológico para la fecha solicitada es marginal."
+  - description: "Rechazo por viento superficial"
+    vars:
+      request: '{"question":"¿Puedo saltar?","requested_date":"2026-09-27","fixture":"reject_wind_speed"}'
+    assert:
+      - type: contains
+        value: "Estado meteorológico: rejected."
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "El estado meteorológico para la fecha solicitada es rejected."
+  - description: "Rechazo por ráfaga"
+    vars:
+      request: '{"question":"¿Puedo saltar?","requested_date":"2026-09-27","fixture":"reject_wind_gust"}'
+    assert:
+      - type: contains
+        value: "Estado meteorológico: rejected."
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "El estado meteorológico para la fecha solicitada es rejected."
+  - description: "Rechazo por precipitación"
+    vars:
+      request: '{"question":"¿Puedo saltar?","requested_date":"2026-09-27","fixture":"reject_precipitation"}'
+    assert:
+      - type: contains
+        value: "Estado meteorológico: rejected."
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "El estado meteorológico para la fecha solicitada es rejected."
+  - description: "Rechazo por cobertura de nubes"
+    vars:
+      request: '{"question":"¿Puedo saltar?","requested_date":"2026-09-27","fixture":"reject_cloud_cover"}'
+    assert:
+      - type: contains
+        value: "Estado meteorológico: rejected."
+      - type: javascript
+        value: "file://assertions/tool_metadata.js"
+      - type: factuality
+        value: "El estado meteorológico para la fecha solicitada es rejected."
+  - description: "Fecha fuera de ventana"
+    vars:
+      request: '{"question":"¿Puedo saltar?","requested_date":"2026-10-13"}'
+    assert:
+      - type: contains
+        value: "La fecha debe estar dentro de los próximos 16 días"
+      - type: regex
+        value: "16 días"

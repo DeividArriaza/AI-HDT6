@@ -1,0 +1,317 @@
+{
+  "generated_at": "2026-09-29T03:57:58.100625+00:00",
+  "evaluation_today": "2026-09-26",
+  "grader": "local-reference-control",
+  "promptfoo_factuality_executed": false,
+  "cases": [
+    {
+      "id": "faq_known",
+      "request": {
+        "question": "¿Qué es HDT-5?"
+      },
+      "answer": "Es una demostración educativa de agentes.",
+      "provider_output": "Es una demostración educativa de agentes.\nCitas: faq-001",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "faq",
+        "fixture": "favorable",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [
+          "faq-001"
+        ],
+        "found": true,
+        "latency_ms": 1.403
+      },
+      "latency_ms": 1.541,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "faq_unknown",
+      "request": {
+        "question": "¿Cuál es el color del cielo?"
+      },
+      "answer": "No tengo una respuesta sustentada en el FAQ para esa pregunta.",
+      "provider_output": "No tengo una respuesta sustentada en el FAQ para esa pregunta.",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "faq",
+        "fixture": "favorable",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [],
+        "found": false,
+        "latency_ms": 0.179
+      },
+      "latency_ms": 0.184,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "weather_favorable",
+      "request": {
+        "question": "¿Puedo saltar?",
+        "requested_date": "2026-09-27",
+        "fixture": "favorable"
+      },
+      "answer": "Estado meteorológico: favorable.",
+      "provider_output": "Estado meteorológico: favorable.\nCitas: Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "weather",
+        "fixture": "favorable",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [
+          "Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27"
+        ],
+        "found": true,
+        "status": "favorable",
+        "reasons": [],
+        "latency_ms": 0.389
+      },
+      "latency_ms": 0.395,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "weather_marginal",
+      "request": {
+        "question": "¿Puedo saltar?",
+        "requested_date": "2026-09-27",
+        "fixture": "marginal"
+      },
+      "answer": "Estado meteorológico: marginal.",
+      "provider_output": "Estado meteorológico: marginal.\nCitas: Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "weather",
+        "fixture": "marginal",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [
+          "Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27"
+        ],
+        "found": true,
+        "status": "marginal",
+        "reasons": [
+          "wind_speed entre 20 y 28 km/h"
+        ],
+        "latency_ms": 0.355
+      },
+      "latency_ms": 0.365,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reject_wind_speed",
+      "request": {
+        "question": "¿Puedo saltar?",
+        "requested_date": "2026-09-27",
+        "fixture": "reject_wind_speed"
+      },
+      "answer": "Estado meteorológico: rejected.",
+      "provider_output": "Estado meteorológico: rejected.\nCitas: Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "weather",
+        "fixture": "reject_wind_speed",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [
+          "Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27"
+        ],
+        "found": true,
+        "status": "rejected",
+        "reasons": [
+          "wind_speed > 28 km/h"
+        ],
+        "latency_ms": 0.248
+      },
+      "latency_ms": 0.253,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reject_wind_gust",
+      "request": {
+        "question": "¿Puedo saltar?",
+        "requested_date": "2026-09-27",
+        "fixture": "reject_wind_gust"
+      },
+      "answer": "Estado meteorológico: rejected.",
+      "provider_output": "Estado meteorológico: rejected.\nCitas: Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "weather",
+        "fixture": "reject_wind_gust",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [
+          "Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27"
+        ],
+        "found": true,
+        "status": "rejected",
+        "reasons": [
+          "wind_gust > 35 km/h"
+        ],
+        "latency_ms": 0.189
+      },
+      "latency_ms": 0.194,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reject_precipitation",
+      "request": {
+        "question": "¿Puedo saltar?",
+        "requested_date": "2026-09-27",
+        "fixture": "reject_precipitation"
+      },
+      "answer": "Estado meteorológico: rejected.",
+      "provider_output": "Estado meteorológico: rejected.\nCitas: Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "weather",
+        "fixture": "reject_precipitation",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [
+          "Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27"
+        ],
+        "found": true,
+        "status": "rejected",
+        "reasons": [
+          "precipitation > 0.0 mm"
+        ],
+        "latency_ms": 0.218
+      },
+      "latency_ms": 0.222,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "reject_cloud_cover",
+      "request": {
+        "question": "¿Puedo saltar?",
+        "requested_date": "2026-09-27",
+        "fixture": "reject_cloud_cover"
+      },
+      "answer": "Estado meteorológico: rejected.",
+      "provider_output": "Estado meteorológico: rejected.\nCitas: Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "weather",
+        "fixture": "reject_cloud_cover",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": true,
+        "citations": [
+          "Open-Meteo: https://api.open-meteo.com/v1/forecast?latitude=14.013722&longitude=-90.771611&hourly=wind_gust_10m%2Ctemperature_2m%2Cprecipitation%2Ccloud_cover%2Cwind_speed_10m&start_date=2026-09-27&end_date=2026-09-27"
+        ],
+        "found": true,
+        "status": "rejected",
+        "reasons": [
+          "cloud_cover > 75%"
+        ],
+        "latency_ms": 0.34
+      },
+      "latency_ms": 0.349,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    },
+    {
+      "id": "weather_outside_window",
+      "request": {
+        "question": "¿Puedo saltar?",
+        "requested_date": "2026-10-13"
+      },
+      "answer": "La fecha debe estar dentro de los próximos 16 días",
+      "provider_output": "La fecha debe estar dentro de los próximos 16 días",
+      "metadata": {
+        "architecture": "centralized",
+        "tool_selected": "weather",
+        "fixture": "favorable",
+        "evaluation_today": "2026-09-26",
+        "offline": true,
+        "tool_executed": false,
+        "citations": [],
+        "found": false,
+        "error": "La fecha debe estar dentro de los próximos 16 días",
+        "latency_ms": 0.079
+      },
+      "latency_ms": 0.083,
+      "checks": {
+        "factuality_reference_consistency": true,
+        "contains": true,
+        "regex": true,
+        "latency_under_1000ms": true,
+        "tool_execution": true
+      },
+      "passed": true
+    }
+  ],
+  "summary": {
+    "cases": 9,
+    "passed": 9,
+    "failed": 0,
+    "checks_total": 45,
+    "checks_passed": 45
+  }
+}
